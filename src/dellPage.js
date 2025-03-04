@@ -364,7 +364,7 @@ function DellPage() {
       <Drawer
         variant="permanent"
         sx={{
-          width: 200,
+          width: '13.9vw',
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: 210,
@@ -428,7 +428,7 @@ function DellPage() {
         sx={{
           flexGrow: 1,
           p: 2,
-          marginLeft: '210px',
+          marginLeft: '14.4vw',
           marginTop: '30px'
         }}
       >
