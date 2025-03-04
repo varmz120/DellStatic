@@ -314,6 +314,8 @@ function DellPage() {
     { category: 'F-Pickup', shippable: 33.8, unshippable: 33.8, dod: '-1.6 (8.0%)' },
   ];
 
+  console.log("vw", Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0));
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: 'auto', bgcolor: '#f5f5f5' }}>
       <CssBaseline />
@@ -478,7 +480,7 @@ function DellPage() {
         <Grid2 container spacing={2} sx={{ mb: 2 }}>
           {/* BACKLOG */}
           <Grid2 item xs={12} sm={6} md={3}>
-            <Card sx={{ borderRadius: 3, boxShadow: 1, width:286 }}>
+            <Card sx={{ borderRadius: 3, boxShadow: 1, width:'19.9vw' }}>
               <CardContent>
                 <Typography sx={{mb: 1 }}>BACKLOG</Typography>
                 <Box sx={{display:'flex',flexDirection:"horizontal"}}>                
@@ -507,7 +509,7 @@ function DellPage() {
 
           {/* DOWNLOADS */}
           <Grid2 item xs={12} sm={6} md={3}>
-              <Card sx={{ borderRadius: 3, boxShadow: 1, width:286 }}>
+              <Card sx={{ borderRadius: 3, boxShadow: 1, width:'19.9vw' }}>
                 <CardContent>
                   <Typography  sx={{ mb: 1 }}>DOWNLOADS</Typography>
                   <Box sx={{display:'flex',flexDirection:"horizontal"}}>                
@@ -536,7 +538,7 @@ function DellPage() {
 
           {/* BUILD */}
           <Grid2 item xs={12} sm={6} md={3}>
-              <Card sx={{ borderRadius: 3, boxShadow: 1, width:286 }}>
+              <Card sx={{ borderRadius: 3, boxShadow: 1, width:'19.9vw' }}>
                 <CardContent>
                   <Typography  sx={{ mb: 1 }}>BUILD</Typography>
                   <Box sx={{display:'flex',flexDirection:"horizontal"}}>                
@@ -565,7 +567,7 @@ function DellPage() {
 
           {/* SHUTTLES */}
           <Grid2 item xs={12} sm={6} md={3}>
-              <Card sx={{ borderRadius: 3, boxShadow: 1, width:286 }}>
+              <Card sx={{ borderRadius: 3, boxShadow: 1, width:'19.9vw' }}>
                 <CardContent>
                   <Typography sx={{ mb: 1 }}>SHUTTLES</Typography>
                   <Box sx={{display:'flex',flexDirection:"horizontal"}}>                
@@ -596,7 +598,7 @@ function DellPage() {
         {/* Charts Row */}
         <Grid2 container spacing={2} sx={{ mb: 2 }}>
           <Grid2 item xs={12} md={4}>
-            <Card sx={{ borderRadius: 3, boxShadow: 1, mr:0.5 }}>
+            <Card sx={{ borderRadius: 3, boxShadow: 1, mr:0.5, width:'26.5vw' }}>
               <CardContent>
                 <Typography  sx={{ }}>BACKLOG</Typography>                
                 <HighchartsReact highcharts={Highcharts} options={pieOptions} />
@@ -605,7 +607,7 @@ function DellPage() {
           </Grid2>
           <Box sx={{display:'flex',flexDirection:'column'}}>
             <Grid2>
-              <Card sx={{ borderRadius: 3, boxShadow: 1, mb: 2 }}>
+              <Card sx={{ borderRadius: 3, boxShadow: 1, mb: 2, width: '55vw' }}>
                 <Box sx={{display:'flex',flexDirection:'row',paddingLeft:2,paddingRight:2}}>
                   {/* shippable */}
                   <Box sx={{width:'350px',mr:6}}>
@@ -840,7 +842,7 @@ function DellPage() {
 
             <Box sx={{display:'flex', flexDirection:'row'}}>            
               <Grid2 item xs={12} md={4}>
-                <Card sx={{ borderRadius: 3, boxShadow: 1, width:380, mr:4 }}>
+                <Card sx={{ borderRadius: 3, boxShadow: 1, width:'26.4vw', mr:4 }}>
                   <CardContent sx={{}}>
                     <Typography  sx={{  mb: 1 }}>CAPACITY</Typography>
                     <Box sx={{ display: 'flex', flexDirection: 'row'}}>
@@ -875,7 +877,7 @@ function DellPage() {
               </Grid2>
 
               <Grid2 item xs={12} md={4}>
-                <Card sx={{ borderRadius: 3, boxShadow: 1, width: 380 }}>
+                <Card sx={{ borderRadius: 3, boxShadow: 1, width: '26.4vw' }}>
                   <CardContent sx={{}}>
                     <Typography  sx={{ mb: 1 }}>WK LTG CAPACITY</Typography>
                     <Box sx={{ display: 'flex', flexDirection: 'row'}}>
@@ -915,7 +917,7 @@ function DellPage() {
         {/* Bottom Charts Row */}
         <Grid2 container spacing={2}>
           <Grid2 item xs={12} md={6}>
-            <Card sx={{ borderRadius: 3, boxShadow: 1 , width: 589 }}>
+            <Card sx={{ borderRadius: 3, boxShadow: 1 , width: '40.9vw' }}>
               <CardContent>
                 <Typography sx={{ mb: 1 }}>BACKLOG TREND</Typography>
                 <HighchartsReact highcharts={Highcharts} options={barOptions} />
@@ -924,7 +926,7 @@ function DellPage() {
           </Grid2>
 
           <Grid2 item xs={12} md={6}>
-            <Card sx={{ borderRadius: 3, boxShadow: 1, width: 589 }}>
+            <Card sx={{ borderRadius: 3, boxShadow: 1, width: '40.9vw' }}>
               <CardContent>
                 <Typography  sx={{ mb: 1 }}>FACILITY</Typography>
                 <HighchartsReact highcharts={Highcharts} options={barOptions} />
