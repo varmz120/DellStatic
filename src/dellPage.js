@@ -24,6 +24,7 @@ import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import DescriptionIcon from '@mui/icons-material/Description';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import { Tooltip } from '@mui/material';
 
 import './index.css';
 
@@ -208,7 +209,8 @@ function DellPage() {
       column: {
         stacking: 'normal',
         borderRadius: 7,
-        pointWidth: 19 // Reduce width of bars
+        pointWidth: 19,
+        cursor:'pointer' 
       }
     },
     series: [{
@@ -287,6 +289,7 @@ function DellPage() {
         size: '230%',
         borderWidth:6,
         borderColor:null,
+        cursor:'pointer'
         
         
 
@@ -302,6 +305,19 @@ function DellPage() {
         { y: 10.0, color: '#90e0ef' },  
       ]
     }]
+  };
+
+  const [activeTab, setActiveTab] = useState('client');
+  const [active, setActive] = useState('summary');
+  
+
+  const handleClick = (tab) => {
+    setActiveTab(tab);
+  };
+  
+
+  const handleToggle = (option) => {
+    setActive(option);
   };
 
   
@@ -379,13 +395,39 @@ function DellPage() {
             <ArrowLeftIcon sx={{color:"#0076CE", fontSize:30}}/>
           </Box>
           <Box sx={{ borderRadius:10, height:30,display:'flex', flexDirection:'row', boxShadow: 3,mt:1}}>
-            <Box sx={{borderRadius:5, backgroundColor:'#0076CE', height:30,pl:1.7,pr:1.7,pt:0.5,pb:0.5, cursor: 'pointer'}}>
-              <Typography sx={{color:'white'}}>
+            <Box
+              sx={{
+                borderRadius: 5,
+                backgroundColor: activeTab === 'client' ? '#0076CE' : 'white',
+                height: 30,
+                pl: 1.7,
+                pr: 1.7,
+                pt: 0.5,
+                pb: 0.5,
+                cursor: 'pointer',
+                color: activeTab === 'client' ? 'white' : '#0076CE',
+              }}
+              onClick={() => handleClick('client')}
+            >
+              <Typography>
                 Client
               </Typography>
             </Box>
-            <Box sx={{borderRadius:5, backgroundColor:'white',height:30, pl:1.7,pr:1.7,pt:0.5,pb:0.5, cursor: 'pointer'}}>
-              <Typography sx={{color:'#0076CE'}}>
+            <Box
+              sx={{
+                borderRadius: 5,
+                backgroundColor: activeTab === 'server' ? '#0076CE' : 'white',
+                height: 30,
+                pl: 1.7,
+                pr: 1.7,
+                pt: 0.5,
+                pb: 0.5,
+                cursor: 'pointer',
+                color: activeTab === 'server' ? 'white' : '#0076CE',
+              }}
+              onClick={() => handleClick('server')}
+            >
+              <Typography>
                 Server
               </Typography>
             </Box>
@@ -394,27 +436,43 @@ function DellPage() {
         </Box>
 
         <Box>
-          <Box sx={{
-            backgroundColor:"#0076CE",
-            borderTopRightRadius:50,
-            borderBottomRightRadius:50,
-            width:190,
-            height:30,
-            ml:1,
-            pl:0.8,
-            display:'flex',
-            alignItems:'center',
-            mt:3,
-            cursor: 'pointer'
+          <Box
+            onClick={() => handleToggle('summary')}
+            sx={{
+              backgroundColor: active === 'summary' ? "#0076CE" : 'transparent',
+              borderTopRightRadius: 50,
+              borderBottomRightRadius: 50,
+              width: 190,
+              height: 30,
+              ml: 1,
+              pl: 0.8,
+              display: 'flex',
+              alignItems: 'center',
+              mt: 3,
+              cursor: 'pointer'
             }}>
-            <DescriptionIcon sx={{color:'white',mr:2}}/>
-            <Typography sx={{color:"white"}}>
+            <DescriptionIcon sx={{ color: active === 'summary' ? 'white' : '#0076CE', mr: 2 }} />
+            <Typography sx={{ color: active === 'summary' ? "white" : "#0076CE" }}>
               Summary
             </Typography>
           </Box>
-          <Box sx={{width:190,ml:1.8,mt:2.5, display:'flex', alignItems:'center', cursor: 'pointer'}}>
-            <QueryStatsIcon sx={{color:"#0076CE", mr:2}}/>
-            <Typography sx={{color:"#0076CE"}}>
+          <Box
+            onClick={() => handleToggle('simulation')}
+            sx={{
+              backgroundColor: active === 'simulation' ? "#0076CE" : 'transparent',
+              borderTopRightRadius: 50,
+              borderBottomRightRadius: 50,
+              width: 190,
+              height: 30,
+              ml: 1,
+              pl:0.8,              
+              mt: 2.5,
+              display: 'flex',
+              alignItems: 'center',
+              cursor: 'pointer'
+            }}>
+            <QueryStatsIcon sx={{ color: active === 'simulation' ? 'white' : '#0076CE', mr: 2  }} />
+            <Typography sx={{ color: active === 'simulation' ? "white" : "#0076CE" }}>
               Simulation
             </Typography>
           </Box>
@@ -428,7 +486,7 @@ function DellPage() {
         sx={{
           flexGrow: 1,
           p: 2,
-          marginLeft: '14.4vw',
+          marginLeft: '206px',
           marginTop: '30px'
         }}
       >
@@ -667,45 +725,135 @@ function DellPage() {
                           </Typography>
                       </Box>
                       <Box sx={{ display: 'flex', flexDirection: "column", alignItems: 'flex-end', mr: 2 }}>
-                        <Box sx={{
+                        <Tooltip title={<span>Total: <strong>423</strong></span>} followCursor slotProps={{
+                          tooltip: { sx: {
+                            display:'flex',
+                            backgroundColor: "white",
+                            color:"black" , 
+                            boxShadow:3, 
+                            height:'25px',
+                            width:'40x', 
+                            fontSize:"0.8rem",
+                            justifyContent:'center',
+                            alignItems:'center'
+                            } },                         
+                          
+                          }}>
+                            <Box sx={{
                             width: 80,
                             height: 8, 
                             borderTopLeftRadius: 200,
                             borderBottomLeftRadius: 200,
                             backgroundColor: '#006ca5',
                             mb:0.5,
-                            mt:0.8
+                            mt:0.8,
+                            cursor: 'pointer',
+                            position: 'relative',
+                            '&:hover': {
+                              width: 85,
+                              height: 13,                              
+                              border: '3px solid rgba(255,255,255,0.7)',
+                              
+                            },
                           }} />
+                        </Tooltip>
 
-                        <Box sx={{
+                        <Tooltip title={<span>ATB: <strong>296</strong></span>} followCursor slotProps={{
+                          tooltip: { sx: {
+                            display:'flex',
+                            backgroundColor: "white",
+                            color:"black" , 
+                            boxShadow:3, 
+                            height:'25px',
+                            width:'40x', 
+                            fontSize:"0.8rem",
+                            justifyContent:'center',
+                            alignItems:'center'
+                            } },                         
+                          
+                          }}>
+                            <Box sx={{
                             width: 50,
                             height: 8, 
                             borderTopLeftRadius: 200,
                             borderBottomLeftRadius: 200,
                             backgroundColor: '#00b4d8',
                             mb:0.5,
-                            mt:2.0
+                            mt:2.0,
+                            cursor: 'pointer',
+                            position: 'relative',
+                            '&:hover': {
+                              width: 55,
+                              height: 13,                              
+                              border: '3px solid rgba(255,255,255,0.7)',
+                            },
                           }} />
+                        </Tooltip>
 
-                        <Box sx={{
+                        <Tooltip title={<span>WIP: <strong>39</strong></span>} followCursor slotProps={{
+                          tooltip: { sx: {
+                            display:'flex',
+                            backgroundColor: "white",
+                            color:"black" , 
+                            boxShadow:3, 
+                            height:'25px',
+                            width:'40x', 
+                            fontSize:"0.8rem",
+                            justifyContent:'center',
+                            alignItems:'center'
+                            } },                         
+                          
+                          }}>
+                            <Box sx={{
                             width: 30,
                             height: 8, 
                             borderTopLeftRadius: 200,
                             borderBottomLeftRadius: 200,
                             backgroundColor: '#90e0ef',
                             mb:0.5,
-                            mt:2.0
+                            mt:2.0,
+                            cursor: 'pointer',
+                            position: 'relative',
+                            '&:hover': {
+                              width: 35,
+                              height: 13,                              
+                              border: '3px solid rgba(255,255,255,0.7)',
+                            },
                           }} />
-                          <Box sx={{
+                        </Tooltip>
+
+                        <Tooltip title={<span>USL: <strong>33</strong></span>} followCursor slotProps={{
+                          tooltip: { sx: {
+                            display:'flex',
+                            backgroundColor: "white",
+                            color:"black" , 
+                            boxShadow:3, 
+                            height:'25px',
+                            width:'40x', 
+                            fontSize:"0.8rem",
+                            justifyContent:'center',
+                            alignItems:'center'
+                            } },                         
+                          
+                          }}>
+                            <Box sx={{
                             width: 20,
                             height: 8, 
                             borderTopLeftRadius: 200,
                             borderBottomLeftRadius: 200,
                             backgroundColor: '#caf0f8',
                             mb:0.5,
-                            mt:2.0
+                            mt:2.0,
+                            cursor: 'pointer',
+                            position: 'relative',
+                            '&:hover': {
+                              width: 25,
+                              height: 13,                              
+                              border: '3px solid rgba(255,255,255,0.7)',
+                            },
                           }} />
 
+                        </Tooltip>
                       </Box>
 
                       <Box sx={{ display: 'flex', flexDirection: "column", alignItems: 'flex-end' }}>
@@ -753,35 +901,115 @@ function DellPage() {
                         </Typography>
                       </Box>
                       <Box sx={{ display: 'flex', flexDirection: "column", alignItems: 'flex-start', ml: 2 }}>
-                        <Box sx={{
-                            width: 80,
-                            height: 8, 
-                            borderTopRightRadius: 200,
-                            borderBottomRightRadius: 200,
-                            backgroundColor: '#006ca5',
-                            mb:0.5,
-                            mt:0.8
-                          }} />
-
-                        <Box sx={{
+                        <Tooltip title={<span>User: <strong>423</strong></span>} followCursor slotProps={{
+                          tooltip: { sx: {
+                            display:'flex',
+                            backgroundColor: "white",
+                            color:"black" , 
+                            boxShadow:3, 
+                            height:'25px',
+                            width:'40x', 
+                            fontSize:"0.8rem",
+                            justifyContent:'center',
+                            alignItems:'center'
+                            } },                         
+                          
+                          }}>
+                          <Box
+                            sx={{
+                              width: 80,
+                              height: 8,
+                              borderTopRightRadius: 200,
+                              borderBottomRightRadius: 200,
+                              backgroundColor: '#006ca5',
+                              mb: 0.5,
+                              mt: 0.8,
+                              cursor: 'pointer',
+                              position: 'relative',
+                              '&:hover': {
+                                width: 85,
+                                height: 13,                              
+                                border: '3px solid rgba(255,255,255,0.7)', 
+                              },
+                            }}
+                          />
+                        </Tooltip>
+                        <Tooltip title={<span>ATB: <strong>296</strong></span>} followCursor slotProps={{
+                         tooltip: { sx: {
+                           display:'flex',
+                           backgroundColor: "white",
+                           color:"black" , 
+                           boxShadow:3, 
+                           height:'25px',
+                           width:'40x', 
+                           fontSize:"0.8rem",
+                           justifyContent:'center',
+                           alignItems:'center'
+                           } },                         
+                         
+                         }}>
+                          <Box sx={{
                             width: 50,
                             height: 8, 
                             borderTopRightRadius: 200,
                             borderBottomRightRadius: 200,
                             backgroundColor: '#00b4d8',
                             mb:0.5,
-                            mt:2.0
+                            mt:2.0,
+                            cursor: 'pointer',
+                            position: 'relative',
+                            '&:hover': {
+                              width: 55,
+                              height: 13,                              
+                              border: '3px solid rgba(255,255,255,0.7)',
+                            },
                           }} />
-
-                        <Box sx={{
+                         </Tooltip>
+                         <Tooltip title={<span>WIP: <strong>39</strong></span>} followCursor slotProps={{
+                         tooltip: { sx: {
+                           display:'flex',
+                           backgroundColor: "white",
+                           color:"black" , 
+                           boxShadow:3, 
+                           height:'25px',
+                           width:'40x', 
+                           fontSize:"0.8rem",
+                           justifyContent:'center',
+                           alignItems:'center'
+                           } },                         
+                         
+                         }}>
+                          <Box sx={{
                             width: 30,
                             height: 8, 
                             borderTopRightRadius: 200,
                             borderBottomRightRadius: 200,
                             backgroundColor: '#90e0ef',
                             mb:0.5,
-                            mt:2.0
+                            mt:2.0,
+                            position: 'relative',
+                            cursor: 'pointer',
+                            '&:hover': {
+                              width: 35,
+                              height: 13,                              
+                              border: '3px solid rgba(255,255,255,0.7)',
+                            },
                           }} />
+                         </Tooltip>
+                         <Tooltip title={<span>STBL: <strong>33</strong></span>} followCursor slotProps={{
+                         tooltip: { sx: {
+                           display:'flex',
+                           backgroundColor: "white",
+                           color:"black" , 
+                           boxShadow:3, 
+                           height:'25px',
+                           width:'40x', 
+                           fontSize:"0.8rem",
+                           justifyContent:'center',
+                           alignItems:'center'
+                           } },                         
+                         
+                         }}>
                           <Box sx={{
                             width: 20,
                             height: 8, 
@@ -789,9 +1017,16 @@ function DellPage() {
                             borderBottomRightRadius: 200,
                             backgroundColor: '#caf0f8',
                             mb:0.5,
-                            mt:2.0
+                            mt:2.0,
+                            position: 'relative',
+                            cursor: 'pointer',
+                            '&:hover': {
+                              width: 25,
+                              height: 13,                              
+                              border: '3px solid rgba(255,255,255,0.7)',
+                            },
                           }} />
-
+                         </Tooltip> 
                       </Box>
                       <Box sx={{ display: 'flex', flexDirection: "column", alignItems: 'flex-start',ml:4 }}>
                           <Typography sx={{ mb: 0.5,fontSize: '1rem' }} >
